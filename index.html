@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2 Yılımız - Hikaye Formatı ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: palevioletred; /* Pembe arka plan */
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .story-container {
+      text-align: center;
+      max-width: 90%;
+      position: relative;
+      color: #fff;
+      z-index: 1;
+      padding: 20px;
+    }
+
+    .story-container img {
+      width: 100%;  /* Resmin genişliği %100 olacak */
+      height: 100%; /* Resmin yüksekliği de %100 olacak */
+      object-fit: cover; /* Resmi, container'a sığacak şekilde kırpacak */
+      max-width: 400px; /* Resmin maksimum genişliğini sınırladık */
+      max-height: 400px; /* Resmin maksimum yüksekliğini sınırladık */
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      font-size: 3rem; /* Başlık boyutunu büyüttük */
+      margin: 20px 0 10px;
+    }
+
+    p {
+      font-size: 1.5rem; /* Yazı boyutunu daha büyük yaptık */
+      margin-bottom: 20px;
+    }
+
+    .progress-bar {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      height: 5px;
+      background-color: rgba(255, 255, 255, 0.3);
+      overflow: hidden;
+      border-radius: 3px;
+    }
+
+    .progress-bar div {
+      height: 100%;
+      width: 0;
+      background-color: #ff6f91;
+      transition: width 0.3s ease;
+    }
+
+    .hearts-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .heart {
+      position: absolute;
+      width: 100px;  /* Kalp boyutunu daha da büyüttük */
+      height: 100px; /* Kalp boyutunu daha da büyüttük */
+      background-image: url('img/kalp1.jpg'); /* Kalp resminin yolu */
+      background-size: cover;
+      background-position: center;
+      animation: float 4s infinite ease-in-out;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-20px) scale(1.2);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-50px) scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive tasarım */
+    @media (max-width: 768px) {
+      .story-container img {
+        max-width: 650px; /* Mobil için uygun fotoğraf boyutu */
+      }
+
+      h1 {
+        font-size: 2.5rem; /* Mobilde başlık boyutu */
+      }
+
+      p {
+        font-size: 1.3rem; /* Yazı boyutunu mobil için uygun hale getirdik */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .story-container img {
+        max-width: 400px; /* Küçük ekranlar için fotoğraf boyutu */
+      }
+
+      h1 {
+        font-size: 2rem; /* Küçük ekranlar için başlık boyutu */
+      }
+
+      p {
+        font-size: 1.2rem; /* Küçük ekranlar için yazı boyutu */
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts-container" id="hearts-container"></div>
+  <div class="story-container" onclick="nextSlide()">
+    <div class="progress-bar"><div></div></div>
+    <h1 id="month-title">Ocak 2023</h1>
+    <img id="month-image" src="https://via.placeholder.com/500" alt="Ay Fotoğrafı">
+    <p id="month-note">Bu ay sıcak çayımızla kar yağışını izledik. Ne güzeldi! ❄️❤️</p>
+  </div>
+
+  <script>
+    // Aylar ve içerikler
+    const months = [
+      { month: "Ocak 2023", image: "img/resim1.jpg", note: "Sana aldığım ilk hediye❤️" },
+      { month: "Şubat 2023", image: "img/resim2.jpg", note: "Beraber ilk kahve içtiğimiz gün☕" },
+      { month: "Mart 2023", image: "img/resim3.jpg", note: "Beraber güzel zaman geçiridiğimiz günlerden.🌸" },
+      { month: "Nisan 2023", image: "img/resim4.jpg", note: "Beraber adalarda denize gitmiştik.🏊" },
+      { month: "Mayıs 2023", image: "img/resim5.jpg", note: "Adalarda gezdiğimiz ilk zamanlar.🚶‍♀️ " },
+      { month: "Haziran 2023", image: "img/resim6.jpg", note: "Marmarayda snapchat efektleri denemiştik. 🏖️" },
+      { month: "Temmuz 2023", image: "img/resim7.jpg", note: "Adalarda gezdiğimiz ilk zamanlar.🚶‍♀️" },
+      { month: "Ağustos 2023", image: "img/resim8.jpg", note: "Teşfikiyeden dönerken ❤️" },
+      { month: "Eylül 2023", image: "img/resim9.jpg", note: "Beraber eğlendiğimiz güzel günler 🍂" },
+      { month: "Ekim 2023", image: "img/resim10.jpg", note: "İkimizin ilk bastırdığı resim.📷" },
+      { month: "Kasım 2023", image: "img/resim11.jpg", note: "Beraber ilk hayvanat bahçesine gittiğimiz gün🦁" },
+      { month: "Aralık 2023", image: "img/resim12.jpg", note: "Beraber ilk hayvanat bahçesine gittiğimiz gün🐇" },
+      { month: "Ocak 2024", image: "img/resim13.jpg", note: "Beraber geçirdiğimiz bir sevgililer günü🌸" },
+      { month: "Şubat 2024", image: "img/resim14.jpg", note: "Beraber kutladığımız benim ilk doğum günüm🍰" },
+      { month: "Mart 2024", image: "img/resim15.jpg", note: "Snapchat efektlerini denerken. 🌼" },
+      { month: "Nisan 2024", image: "img/resim16.jpg", note: "Beraber geçirdiğimiz güzel bir gün ✨" },
+      { month: "Mayıs 2024", image: "img/resim17.jpg", note: "Beraber geçirdiğimiz güzel bir gün ✨" },
+      { month: "Haziran 2024", image: "img/resim18.jpg", note: "İkimizin küçüklük resmi 🌸" },
+      { month: "Temmuz 2024", image: "img/resim19.jpg", note: "Snapchat efektlerini denerken. 🌼" },
+      { month: "Ağustos 2024", image: "img/resim20.jpg", note: "Snapchat efektlerini denerken. 🌼" },
+      { month: "Eylül 2024", image: "img/resim21.jpg", note: "Seni her şeyden ❤️" },
+      { month: "Ekim 2024", image: "img/resim22.jpg", note: "Seni herkesden 💞" },
+      { month: "Kasım 2024", image: "img/resim23.jpg", note: "Daha çok seviyorum 💘 " },
+      { month: "Aralık 2024", image: "img/resim24.jpg", note: "İyiki varsın her  şey için teşekkür ederim. ✨" }
+    ];
+
+    let currentSlide = 0;
+    const monthTitle = document.getElementById("month-title");
+    const monthImage = document.getElementById("month-image");
+    const monthNote = document.getElementById("month-note");
+    const progressBar = document.querySelector(".progress-bar div");
+    const heartsContainer = document.getElementById("hearts-container");
+
+    function updateSlide() {
+      const slide = months[currentSlide];
+      monthTitle.textContent = slide.month;
+      monthImage.src = slide.image;
+      monthImage.alt = `${slide.month} Fotoğrafı`;
+      monthNote.textContent = slide.note;
+
+      // İlerleme çubuğu
+      progressBar.style.width = `${((currentSlide + 1) / months.length) * 100}%`;
+
+      // Kalplerin güncellenmesi
+      heartsContainer.innerHTML = "";
+      for (let i = 0; i <= currentSlide; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "%";
+        heart.style.top = Math.random() * 100 + "%";
+        heartsContainer.appendChild(heart);
+      }
+    }
+
+    function nextSlide() {
+      currentSlide++;
+      if (currentSlide >= months.length) {
+        currentSlide = 0; // Baştan başlasın
+      }
+      updateSlide();
+    }
+
+    // İlk slide'ı yükle
+    updateSlide();
+  </script>
+</body>
+</html>
